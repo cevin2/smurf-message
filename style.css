@@ -1,0 +1,403 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+
+    overflow:hidden;
+    background:#000;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+/* ===========================
+   الخلفية
+=========================== */
+
+.background{
+
+    position:fixed;
+    inset:0;
+
+    background:url("background.png") center center/cover no-repeat;
+
+    filter:blur(18px) brightness(.45);
+
+    transform:scale(1.15);
+
+    animation:bg 18s ease-in-out infinite alternate;
+
+    z-index:-2;
+
+}
+
+.background::after{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:url("background.png") center center/contain no-repeat;
+
+    filter:none;
+
+}
+
+@keyframes bg{
+
+from{
+
+transform:scale(1.15);
+
+}
+
+to{
+
+transform:scale(1.22);
+
+}
+
+}
+
+.container{
+
+position:relative;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+width:100%;
+
+height:100vh;
+
+perspective:1800px;
+
+}
+
+/* ===========================
+   الظرف
+=========================== */
+
+.envelope{
+
+    position:relative;
+
+    width:380px;
+    height:260px;
+
+    cursor:pointer;
+
+    transition:1s;
+
+    transform-style:preserve-3d;
+
+}
+
+.envelope-body{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    background:#ffffff;
+
+    border-radius:0 0 18px 18px;
+
+    box-shadow:0 25px 45px rgba(0,0,0,.35);
+
+    overflow:hidden;
+
+}
+
+/* غطاء الظرف */
+
+.envelope-top{
+
+    position:absolute;
+
+    width:100%;
+    height:130px;
+
+    background:#f2f2f2;
+
+    clip-path:polygon(0 0,100% 0,50% 100%);
+
+    transform-origin:top;
+
+    transition:1s;
+
+    z-index:20;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+
+}
+
+/* عند الفتح */
+
+.envelope.open .envelope-top{
+
+    transform:rotateX(180deg);
+
+}
+
+.letter-preview{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.letter-preview h2{
+
+    font-size:55px;
+
+}
+
+.letter-preview p{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:#1779ff;
+
+}
+
+.letter-preview button{
+
+    background:#1779ff;
+
+    color:#fff;
+
+    border:none;
+
+    padding:15px 40px;
+
+    border-radius:50px;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    position:relative;
+    
+    top:-15px;
+
+}
+
+.letter-preview button:hover{
+
+    background:#005ce6;
+
+    transform:translateY(-4px);
+
+}
+
+/* ===========================
+   الرسالة
+=========================== */
+
+.letter{
+
+    position:absolute;
+
+    width:420px;
+    max-width:92vw;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+
+    opacity:0;
+
+    transform:translateY(80px) rotateY(180deg) scale(.8);
+
+    transition:1s;
+
+    pointer-events:none;
+
+}
+
+.letter.show{
+
+    opacity:1;
+
+    transform:translateY(0) rotateY(0deg) scale(1);
+
+    pointer-events:auto;
+
+}
+
+.letter img{
+
+    width:180px;
+
+    border-radius:20px;
+
+    border:5px solid #fff;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    margin-bottom:20px;
+
+}
+
+.letter h1{
+
+    color:#1779ff;
+
+    margin-bottom:20px;
+
+    font-size:32px;
+
+}
+
+.line{
+
+    min-height:38px;
+
+    font-size:23px;
+
+    margin:14px 0;
+
+    font-weight:700;
+
+    color:#333;
+
+}
+
+#doneBtn{
+
+    display:none;
+
+    margin-top:25px;
+
+    background:#1779ff;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:50px;
+
+    padding:15px 35px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#doneBtn:hover{
+
+    transform:translateY(-4px);
+
+    background:#005ce6;
+
+}
+
+/* ===========================
+   الكونفتي
+=========================== */
+
+#confetti{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    pointer-events:none;
+
+}
+
+/* ===========================
+   الجوال
+=========================== */
+
+@media(max-width:600px){
+
+.envelope{
+
+    width:310px;
+
+    height:220px;
+
+}
+
+.letter{
+
+    width:92%;
+
+    padding:22px;
+
+}
+
+.letter img{
+
+    width:150px;
+
+}
+
+.letter h1{
+
+    font-size:28px;
+
+}
+
+.line{
+
+    font-size:20px;
+
+}
+
+.letter-preview p{
+
+    font-size:25px;
+
+}
+
+.letter-preview button{
+
+    width:85%;
+
+    font-size:20px;
+
+}
+
+}
